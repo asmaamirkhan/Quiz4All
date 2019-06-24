@@ -1,18 +1,31 @@
 import React, { Component } from 'react';
 import './css/components.css';
-import { Modal, Button, Form, Row, Col } from 'react-bootstrap';
+import { Modal, Button, Form, Col, Alert } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
+import axios from 'axios';
 
-class SignModal extends React.Component {
+class SignModal extends Component {
   constructor(props, context) {
     super(props, context);
+    this.state = {
+      showAlert: false,
+      show: false,
+      fName: '',
+      lName: '',
+      email: '',
+      uni: '',
+      pwd: '',
+    };
 
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
-
-    this.state = {
-      show: false,
-    };
+    this.handleFirstName = this.handleFirstName.bind(this);
+    this.handleLastName = this.handleLastName.bind(this);
+    this.handleEmail = this.handleEmail.bind(this);
+    this.handleUni = this.handleUni.bind(this);
+    this.handlePwd = this.handlePwd.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.checkEmptyFields = this.checkEmptyFields.bind(this);
   }
 
   handleClose() {
@@ -21,6 +34,92 @@ class SignModal extends React.Component {
 
   handleShow() {
     this.setState({ show: true });
+  }
+
+  handleFirstName(event) {
+    this.setState({ fName: event.target.value });
+    if ((event.target.value).trim() !== '')
+      event.target.style['borderColor'] = '#ced4da'
+  }
+
+  handleLastName(event) {
+    this.setState({ lName: event.target.value });
+    if ((event.target.value).trim() !== '')
+      event.target.style['borderColor'] = '#ced4da'
+  }
+
+  handleEmail(event) {
+    this.setState({ email: event.target.value });
+    if ((event.target.value).trim() !== '')
+      event.target.style['borderColor'] = '#ced4da'
+  }
+
+  handleUni(event) {
+    this.setState({ uni: event.target.value });
+    if ((event.target.value).trim() !== '')
+      event.target.style['borderColor'] = '#ced4da'
+  }
+
+  handlePwd(event) {
+    this.setState({ pwd: event.target.value });
+    if ((event.target.value).trim() !== '')
+      event.target.style['borderColor'] = '#ced4da'
+  }
+
+  async checkEmptyFields(event) {
+
+    this.setState({ showAlert: false });
+    if ((this.state.fName).trim() === '') {
+      document.getElementById("formFirstName").style["border-color"] = "#F24516";
+      this.setState({ showAlert: true });
+    }
+    if ((this.state.lName).trim() === '') {
+      document.getElementById("formLastName").style["border-color"] = "#F24516";
+      this.setState({ showAlert: true });
+    }
+    if ((this.state.email).trim() === '') {
+      document.getElementById("formEmail").style["border-color"] = "#F24516";
+      this.setState({ showAlert: true });
+    }
+    if ((this.state.uni).trim() === '') {
+      document.getElementById("formUni").style["border-color"] = "#F24516";
+      this.setState({ showAlert: true });
+    }
+    if ((this.state.pwd).trim() === '') {
+      document.getElementById("formPass").style["border-color"] = "#F24516";
+      this.setState({ showAlert: true });
+    }
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    this.checkEmptyFields().then(() => {
+      if (this.state.showAlert === false) {
+        axios.post('http://localhost:3000/access?process=signup', {
+          firstName: this.state.fName,
+          lastName: this.state.lName,
+          email: this.state.email,
+          university: this.state.uni,
+          password: this.state.pwd
+        })
+          .then((response) => {
+            if (response.data.status === false) {
+              this.setState({ showAlert: true });
+              document.getElementById('modalAlert').innerHTML = response.data.message;
+            } else {
+              document.getElementById('formContent').style['display'] = 'none';
+              document.getElementById('confirmationContent').style['display'] = 'inline';
+              document.getElementById('signupBut').style['display'] = 'none';
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      } else {
+        document.getElementById('modalAlert').innerHTML = 'All fields are required';
+      }
+    }
+    )
   }
 
   render() {
@@ -32,46 +131,56 @@ class SignModal extends React.Component {
         </Modal.Header>
         <Form>
           <Modal.Body>
+            <div id='formContent'>
+              <Form.Row>
+                <Form.Group as={Col} controlId="formFirstName" required>
+                  <Form.Label>First Name</Form.Label>
+                  <Form.Control placeholder="First Name.." onChange={this.handleFirstName} />
+                </Form.Group>
 
-            <Form.Row>
-              <Form.Group as={Col} controlId="formFirstName" required>
-                <Form.Label>First Name</Form.Label>
-                <Form.Control placeholder="First Name.." />
+                <Form.Group as={Col} controlId="formLastName">
+                  <Form.Label>Last Name</Form.Label>
+                  <Form.Control placeholder="Last Name.." onChange={this.handleLastName} />
+                </Form.Group>
+              </Form.Row>
+
+              <Form.Row>
+                <Form.Group as={Col} controlId="formEmail">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control type="email" placeholder="example@mail.com" onChange={this.handleEmail} />
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="formUni">
+                  <Form.Label>University</Form.Label>
+                  <Form.Control placeholder="University name.." onChange={this.handleUni} />
+                </Form.Group>
+              </Form.Row>
+
+              <Form.Group controlId="formPass">
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" onChange={this.handlePwd} />
               </Form.Group>
 
-              <Form.Group as={Col} controlId="formLastName">
-                <Form.Label>Last Name</Form.Label>
-                <Form.Control placeholder="Last Name.." />
-              </Form.Group>
-            </Form.Row>
+              <Alert variant="primary" show={this.state.showAlert} id='modalAlert' />
+            </div>
 
-            <Form.Row>
-              <Form.Group as={Col} controlId="formEmail">
-                <Form.Label>Email</Form.Label>
-                <Form.Control type="email" placeholder="example@mail.com" />
-              </Form.Group>
-
-              <Form.Group as={Col} controlId="formUni">
-                <Form.Label>University</Form.Label>
-                <Form.Control placeholder="University name.." />
-              </Form.Group>
-            </Form.Row>
-
-            <Form.Group controlId="formPass">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" />
-            </Form.Group>
-
+            <div id='confirmationContent' style={{ display: 'none' }}>
+              <Alert variant="success">
+                Signed up successfully!
+              </Alert>
+            </div>
 
           </Modal.Body>
+
           <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleClose}>
+            <Button variant="secondary" onClick={this.handleClose} >
               Close
             </Button>
-            <Button variant="primary" type="submit" onClick={this.handleClose}>
+            <Button variant="primary" type="submit" onClick={this.handleSubmit} id='signupBut'>
               Signup
             </Button>
           </Modal.Footer>
+
         </Form>
       </Modal>
 
