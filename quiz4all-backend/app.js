@@ -6,9 +6,10 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var accessRouter = require('./routes/user_access');
+var accessRouter = require('./routes/prof_access');
 var quizRouter = require('./routes/quiz_ops');
-
+var questionRouter = require('./routes/question_ops');
+var answerRouter = require('./routes/answer_ops');
 var app = express();
 
 // view engine setup
@@ -20,7 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+/*
 app.post(function(req, res, next) {
   //res.header("Access-Control-Allow-Origin", "*");
   //res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -28,10 +29,12 @@ app.post(function(req, res, next) {
   console.log(req);
   console.log("CORS");
   next();
-  });
+  });*/
 
 app.use('/access', accessRouter);
 app.use('/quiz', quizRouter);
+app.use('/question', questionRouter);
+app.use('/answer', answerRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 

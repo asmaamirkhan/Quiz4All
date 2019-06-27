@@ -1,3 +1,7 @@
+/*
+ @author: Asmaa ~ 2019 
+*/
+
 module.exports = {
     success_func: function (msg, data) {
       let res = {
