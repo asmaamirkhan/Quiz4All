@@ -4,7 +4,7 @@
 
 const modules = require('./common_modules');
 
-function quizOperations(req, res) {
+function answerOperations(req, res) {
     switch (req.query.process) {
         case 'add':
             if (!(req.body.truth))
@@ -50,4 +50,4 @@ function quizOperations(req, res) {
     }
 }
 
-module.exports = quizOperations;
+module.exports = answerOperations;

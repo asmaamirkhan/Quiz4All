@@ -4,7 +4,7 @@
 
 const modules = require('./common_modules');
 
-function quizOperations(req, res) {
+function questionOperations(req, res) {
     switch (req.query.process) {
         case 'add':
             modules.conn.query(
@@ -46,4 +46,4 @@ function quizOperations(req, res) {
     }
 }
 
-module.exports = quizOperations;
+module.exports = questionOperations;
