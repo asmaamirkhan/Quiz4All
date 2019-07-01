@@ -6,7 +6,6 @@ const modules = require('./common_modules');
 
 function userAccess(req, res) {
     if (req.query.process == 'signup') {
-        console.log(req.body)
         modules.bcrypt.hash(req.body.password, 5, function (err, hashed_pwd) {
             if (err)
                 return res.json(modules.error_func('Encryption error', req.body));
@@ -24,6 +23,7 @@ function userAccess(req, res) {
                     }
                     res.json(modules.success_func('User added successfully'));
                 });
+                console.log("sss")
         });
     } else if (req.query.process == 'login') {
         modules.conn.query(

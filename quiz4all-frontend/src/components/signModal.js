@@ -10,8 +10,7 @@ class SignModal extends Component {
     this.state = {
       showAlert: false,
       show: false,
-      fName: '',
-      lName: '',
+      name: '',
       email: '',
       uni: '',
       pwd: '',
@@ -19,8 +18,7 @@ class SignModal extends Component {
 
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
-    this.handleFirstName = this.handleFirstName.bind(this);
-    this.handleLastName = this.handleLastName.bind(this);
+    this.handleName = this.handleName.bind(this);
     this.handleEmail = this.handleEmail.bind(this);
     this.handleUni = this.handleUni.bind(this);
     this.handlePwd = this.handlePwd.bind(this);
@@ -36,14 +34,8 @@ class SignModal extends Component {
     this.setState({ show: true });
   }
 
-  handleFirstName(event) {
-    this.setState({ fName: event.target.value });
-    if ((event.target.value).trim() !== '')
-      event.target.style['borderColor'] = '#ced4da'
-  }
-
-  handleLastName(event) {
-    this.setState({ lName: event.target.value });
+  handleName(event) {
+    this.setState({ name: event.target.value });
     if ((event.target.value).trim() !== '')
       event.target.style['borderColor'] = '#ced4da'
   }
@@ -69,12 +61,8 @@ class SignModal extends Component {
   async checkEmptyFields(event) {
 
     this.setState({ showAlert: false });
-    if ((this.state.fName).trim() === '') {
-      document.getElementById("formFirstName").style["border-color"] = "#F24516";
-      this.setState({ showAlert: true });
-    }
-    if ((this.state.lName).trim() === '') {
-      document.getElementById("formLastName").style["border-color"] = "#F24516";
+    if ((this.state.name).trim() === '') {
+      document.getElementById("formFullName").style["border-color"] = "#F24516";
       this.setState({ showAlert: true });
     }
     if ((this.state.email).trim() === '') {
@@ -96,8 +84,7 @@ class SignModal extends Component {
     this.checkEmptyFields().then(() => {
       if (this.state.showAlert === false) {
         axios.post('http://localhost:3000/access?process=signup', {
-          firstName: this.state.fName,
-          lastName: this.state.lName,
+          name: this.state.name,
           email: this.state.email,
           university: this.state.uni,
           password: this.state.pwd
@@ -133,14 +120,9 @@ class SignModal extends Component {
           <Modal.Body>
             <div id='formContent'>
               <Form.Row>
-                <Form.Group as={Col} controlId="formFirstName" required>
-                  <Form.Label>First Name</Form.Label>
-                  <Form.Control placeholder="First Name.." onChange={this.handleFirstName} />
-                </Form.Group>
-
-                <Form.Group as={Col} controlId="formLastName">
-                  <Form.Label>Last Name</Form.Label>
-                  <Form.Control placeholder="Last Name.." onChange={this.handleLastName} />
+                <Form.Group as={Col} controlId="formFullName" required>
+                  <Form.Label>Full Name</Form.Label>
+                  <Form.Control placeholder="Full name .." onChange={this.handleName} />
                 </Form.Group>
               </Form.Row>
 

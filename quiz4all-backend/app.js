@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var bodyParser = require('body-parser')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -19,20 +20,23 @@ app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(express.json());
+
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-/*
-app.post(function(req, res, next) {
-  //res.header("Access-Control-Allow-Origin", "*");
-  //res.header("Access-Control-Allow-Headers", "X-Requested-With");
+//app.use(bodyParser.json()); 
+
+/*app.use(function(req, res, next) {
+//res.header("Access-Control-Allow-Origin", "*");
+//res.header("Access-Control-Allow-Headers", "X-Requested-With");
   console.log("CORS");
-  console.log(req);
+  console.log(req.body);
   console.log("CORS");
-  next();
+  next()
   });*/
-app.use('/student', studentRouter);
 app.use('/access', accessRouter);
+app.use('/student', studentRouter);
+
 app.use('/quiz', quizRouter);
 app.use('/question', questionRouter);
 app.use('/answer', answerRouter);
