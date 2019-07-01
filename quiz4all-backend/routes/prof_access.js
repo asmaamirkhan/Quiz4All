@@ -46,7 +46,7 @@ function userAccess(req, res) {
                                 }
                             });
                         } else {
-                            res.json(modules.error_func('Incorrect email1 or password', 512, req.body));
+                            res.json(modules.error_func('Incorrect email or password', 512, req.body));
                         }
                     });
                 } else {

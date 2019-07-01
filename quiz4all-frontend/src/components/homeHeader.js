@@ -20,7 +20,7 @@ class HomeHeader extends Component {
     this.showModal = handleShow;
   }
 
-  onLoginClick = () => {
+  onLoginClick = () => { 
     this.showModal();
   }
 
