@@ -14,6 +14,11 @@ Under development :hourglass_flowing_sand:
 * Styling:
    * Bootstrap
 
+# TODO
+- [ ] Email verification
+- [ ] More modular structure
+- [ ] More dynamic React components
+
 ## Contact or Support
 Find me on [LinkedIn](https://www.linkedin.com/in/asmaa-mirkhan/) and feel free to mail me, [Asmaa](mailto:asmaamirkhan.am@gmail.com)
 

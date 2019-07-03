@@ -18,7 +18,7 @@ class ProfNavbar extends Component {
     return (
       <div>
         <Navbar bg="primary" variant="dark">
-          <Navbar.Brand href="#home">Quiz4All</Navbar.Brand>
+          <Navbar.Brand href="/">Quiz4All</Navbar.Brand>
           <Nav className="ml-auto my-2 my-lg-0">
             <Nav.Link onClick={() => {this.logout()}}>Logout</Nav.Link>
           </Nav>
