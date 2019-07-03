@@ -1,3 +1,6 @@
+/*
+ @author: Asmaa ~ 2019 
+*/
 import React, { Component } from 'react';
 import './css/components.css';
 import { Modal, Button, Form, Col, Alert } from 'react-bootstrap';

@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import { Table, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { getCookie } from 'react-simple-cookie-store';
+
 class ProfessorHomeContent extends Component {
   constructor(props) {
     super(props);

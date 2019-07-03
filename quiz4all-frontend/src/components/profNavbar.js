@@ -6,7 +6,7 @@ import './css/components.css';
 import { Navbar, Nav } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import './css/creative.css';
-import { getCookie, removeCookie } from 'react-simple-cookie-store';
+import { removeCookie } from 'react-simple-cookie-store';
 class ProfNavbar extends Component {
 
   logout = () => {
