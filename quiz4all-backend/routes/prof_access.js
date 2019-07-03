@@ -23,11 +23,10 @@ function userAccess(req, res) {
                     }
                     res.json(modules.success_func('User added successfully'));
                 });
-                console.log("sss")
         });
     } else if (req.query.process == 'login') {
         modules.conn.query(
-            'SELECT EMAIL, PASSWORD FROM PROFESSOR WHERE EMAIL=? ', [req.body.email],
+            'SELECT ID,EMAIL, PASSWORD FROM PROFESSOR WHERE EMAIL=? ', [req.body.email],
             function (error, result) {
                 if (error) {
                     console.log(error)
@@ -38,6 +37,7 @@ function userAccess(req, res) {
                     modules.bcrypt.compare(req.body.password, result[0]['PASSWORD'], function (err, equal) {
 
                         if (equal) {
+                            console.log(result)
                             modules.jwt.sign({ id: result[0]['ID'] }, 'QUIZ4ALL2019', function (err, token) {
                                 if (err) {
                                     res.json(modules.error_func('Token error', 513, req.body));

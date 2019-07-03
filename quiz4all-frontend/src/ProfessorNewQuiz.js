@@ -3,8 +3,8 @@
 */
 import React, {Component} from 'react';
 import ProfNavbar from './components/profNavbar';
-import ProfSidebar from './components/profSidebar';
-import ProfessorHomeContent from './components/professorHomeContent'
+import ProfSidebar from './components/profSidebar'
+
 class ProfessorHome extends Component {
   render() {
     return (
@@ -12,7 +12,6 @@ class ProfessorHome extends Component {
       <div>
         <ProfNavbar/>
         <ProfSidebar/>
-        <ProfessorHomeContent/>
       </div>
       
     );

@@ -12,6 +12,7 @@ var quizRouter = require('./routes/quiz_ops');
 var questionRouter = require('./routes/question_ops');
 var answerRouter = require('./routes/answer_ops');
 var studentRouter = require('./routes/student_ops');
+var verifyAuth = require('./routes/verify');
 var app = express();
 
 // view engine setup
@@ -24,6 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
 //app.use(bodyParser.json()); 
 
 /*app.use(function(req, res, next) {
@@ -34,6 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
   console.log("CORS");
   next()
   });*/
+app.use(verifyAuth)
 app.use('/access', accessRouter);
 app.use('/student', studentRouter);
 

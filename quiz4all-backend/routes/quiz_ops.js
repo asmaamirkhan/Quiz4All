@@ -55,6 +55,23 @@ function quizOperations(req, res) {
                     res.json(modules.success_func('Quiz is fetched successfully', quiz));
                 });
             break;
+
+        case 'getAllQuizes':
+            modules.conn.query(
+                'SELECT QUIZ.*, COUNT(STUDENT.QUIZ_ID) AS STD_COUNT FROM QUIZ  LEFT JOIN STUDENT ON ' +
+                ' QUIZ.ID = STUDENT.QUIZ_ID WHERE QUIZ.PROF_ID=? GROUP BY QUIZ.ID ',
+                [req.body.decoded_id]
+                , function (error, result) {
+                    if (error) {
+                        console.log(error)
+                        return res.json(modules.error_func('Database error', 511, req.body));
+                    }
+                    console.log(req.body)
+                    res.json(modules.success_func('Quizes are fetched successfully', result));
+                });
+            break;
+
+
         case 'getStatistic':
             modules.conn.query(
                 'select student.NAME, student.EMAIL, student.GRADE from quiz, student where ' +

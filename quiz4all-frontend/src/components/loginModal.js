@@ -1,3 +1,6 @@
+/*
+ @author: Asmaa ~ 2019 
+*/
 import React, { Component } from 'react';
 import './css/components.css';
 import { Modal, Button, Form, Col, Alert } from 'react-bootstrap';
@@ -55,7 +58,8 @@ class LoginModal extends Component {
           this.setState({ showAlert: true });
           document.getElementById('modalAlert').innerHTML = response.data.message;
         }
-        setCookie('SessionID', response.data.data, 30)
+        setCookie('SessionID', response.data.data, 30);
+        window.location.href = "/Home";
         console.log(response)
       })
       .catch(function (error) {
