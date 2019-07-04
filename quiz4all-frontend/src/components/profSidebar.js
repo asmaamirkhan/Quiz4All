@@ -31,14 +31,17 @@ class ProfSidebar extends Component {
     return (
       <div>
         <div className="sidebar">
-          <Link to={'/Home'}>
-            <p className="active" href="#home">Last quizes</p>
+          <Link to={'/home'}>
+            <p className="active">Last quizes</p>
           </Link>
-          <Link to={'/Home'}>
-            <p href="#home">New quiz</p>
+          <Link to={'/home'}>
+            <p>New quiz</p>
           </Link>
-          <Link to={'/Home'}>
-            <p href="#home">Profile</p>
+          <Link to={'/guide'}>
+            <p>Component Guide</p>
+          </Link>
+          <Link to={'/home'}>
+            <p>Profile</p>
           </Link>
         </div>
         

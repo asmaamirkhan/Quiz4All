@@ -34,7 +34,7 @@ class ProfessorHomeContent extends Component {
   render() {
     return (
       <div>
-        <div className="content">
+        <div className="content" style={{ 'padding': '25px' }}>
           <h2>Last quizes</h2>
           <Table striped bordered hover responsive>
             <thead>

@@ -2,7 +2,7 @@
 A quiz system to make it easy for professors to do online quizzes.
 
 ## Status:
-Under development :hourglass_flowing_sand:
+MVP is Under development :hourglass_flowing_sand:
 
 ## Technologies
 * Back-end:
@@ -13,6 +13,7 @@ Under development :hourglass_flowing_sand:
    * React.js
 * Styling:
    * Bootstrap
+   * Material-ui
 
 # TODO
 - [ ] Email verification

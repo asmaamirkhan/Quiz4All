@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
-import Home from './Home'
-import ProfessorHome from './ProfessorHome'
-
+import HomePage from './HomePage';
+import ProfessorHomePage from './ProfessorHomePage';
+import ProfessorGuidePage from './ProfessorGuidePage';
 class App extends Component {
   componentDidMount() {
     document.title = "Quiz4All"
@@ -12,8 +12,9 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/Home" component={ProfessorHome} />
-          <Route path="/" component={Home} />
+          <Route path="/home" component={ProfessorHomePage} />
+          <Route path="/guide" component={ProfessorGuidePage} />
+          <Route path="/" component={HomePage} />
         </Switch>
       </BrowserRouter>
     );

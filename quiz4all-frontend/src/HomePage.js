@@ -1,3 +1,6 @@
+/*
+ @author: Asmaa ~ 2019 
+*/
 import React, {Component} from 'react';
 import Navbar from './components/navbar';
 import HomeHeader from './components/homeHeader';
@@ -5,7 +8,7 @@ import HomeServices from './components/homeServices';
 import HomeContact from './components/homeContact';
 import HomeFooter from './components/homeFooter';
 
-class Home extends Component {
+class HomePage extends Component {
   render() {
     return (
       
@@ -21,4 +24,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default HomePage;
