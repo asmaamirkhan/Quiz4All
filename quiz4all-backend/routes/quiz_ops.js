@@ -59,14 +59,18 @@ function quizOperations(req, res) {
         case 'getAllQuizes':
             modules.conn.query(
                 'SELECT QUIZ.*, COUNT(STUDENT.QUIZ_ID) AS STD_COUNT FROM QUIZ  LEFT JOIN STUDENT ON ' +
-                ' QUIZ.ID = STUDENT.QUIZ_ID WHERE QUIZ.PROF_ID=? GROUP BY QUIZ.ID ',
+                ' QUIZ.ID = STUDENT.QUIZ_ID WHERE QUIZ.PROF_ID=? GROUP BY QUIZ.ID ORDER BY ID DESC',
                 [req.body.decoded_id]
                 , function (error, result) {
                     if (error) {
                         console.log(error)
                         return res.json(modules.error_func('Database error', 511, req.body));
                     }
-                    console.log(req.body)
+                    console.log(new Date(result[0]['ACTIVATION_TIME']).toLocaleString())
+                    result.map((item)=>{
+                        item['ACTIVATION_TIME']=item['ACTIVATION_TIME'].toLocaleString(); 
+                        item['END_TIME']=item['END_TIME'].toLocaleString();
+                    })
                     res.json(modules.success_func('Quizes are fetched successfully', result));
                 });
             break;

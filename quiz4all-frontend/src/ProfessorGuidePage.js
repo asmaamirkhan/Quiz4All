@@ -27,7 +27,7 @@ class ProfessorGuidePage extends Component {
   render() {
     return (
 
-      <div>
+      <div style={{ height: '100%' }}>
         <Layout style={{ height: '100%' }}>
           <Sider trigger={null} collapsible collapsed={this.state.collapsed} >
             <ProfSidebar />
