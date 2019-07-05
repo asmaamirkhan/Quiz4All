@@ -2,42 +2,58 @@
  @author: Asmaa ~ 2019 
 */
 import React, { Component } from 'react';
-import axios from 'axios';
-import { getCookie } from 'react-simple-cookie-store';
 
 import 'antd/dist/antd.css';
 import './index.css';
-import { Layout} from 'antd';
-const {  Content, Footer } = Layout;
-class ProfessorHomeContent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      quizes: []
-    }
-  }
+import { Layout, Menu, Icon } from 'antd';
+const { Header, Sider, Content, Footer } = Layout;
+class ProfessorHomePageV2 extends Component {
+  state = {
+    collapsed: false,
+  };
 
-
-  componentDidMount() {
-    axios.post('http://localhost:3000/quiz?process=getAllQuizes', {}, { headers: { token: getCookie('SessionID') } })
-      .then((response) => {
-        if (!(response.data.status)) {
-        } else {
-          this.setState({ quizes: response.data.data })
-        }
-
-        console.log(response)
-      })
-      .catch(function (error) {
-
-        console.log(error);
-      });
-  }
+  toggle = () => {
+    this.setState({
+      collapsed: !this.state.collapsed,
+    });
+  };
 
   render() {
     return (
-      <div>
-       <Content
+      <Layout style={{ height: '100%' }}>
+        <Sider trigger={null} collapsible collapsed={this.state.collapsed} >
+          <div className="logo" />
+          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+            <Menu.Item key="1">
+              <Icon type="clock-circle" />
+              <span>Last Quizes</span>
+            </Menu.Item>
+            <Menu.Item key="2">
+              <Icon type="plus-circle" />
+              <span>New Quiz</span>
+            </Menu.Item>
+            <Menu.Item key="3">
+              <Icon type="question-circle" />
+              <span>Question Guide</span>
+            </Menu.Item>
+          </Menu>
+        </Sider>
+        <Layout >
+          <Header style={{ background: '#fff', padding: 0 }}>
+            <Icon
+              className="trigger"
+              type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
+              onClick={this.toggle}
+            />
+            <Menu
+              mode="horizontal"
+              style={{ float: 'right', lineHeight: '64px' }}
+            >
+              <Menu.Item key="1"><Icon type="logout" />Logout</Menu.Item>
+
+            </Menu>
+          </Header>
+          <Content
             style={{
               margin: '24px 16px',
               padding: 24,
@@ -61,10 +77,9 @@ class ProfessorHomeContent extends Component {
   "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains."
         </Content>
           <Footer style={{ textAlign: 'center' }}>Quiz4All ©2019 Developed by Asmaa</Footer>
-      </div>
-
-    );
+        </Layout>
+      </Layout>
+    )
   }
 }
-
-export default ProfessorHomeContent;
+export default ProfessorHomePageV2;

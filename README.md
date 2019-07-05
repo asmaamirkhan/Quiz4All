@@ -12,8 +12,7 @@ MVP is Under development :hourglass_flowing_sand:
 * Front-end:
    * React.js
 * Styling:
-   * Bootstrap
-   * Material-ui
+   * Ant Design
 
 # TODO
 - [ ] Email verification
