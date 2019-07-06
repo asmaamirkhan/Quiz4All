@@ -8,6 +8,7 @@ import { getCookie } from 'react-simple-cookie-store';
 import 'antd/dist/antd.css';
 import './index.css';
 import { Layout, Table } from 'antd';
+
 const { Content } = Layout;
 const { Column } = Table;
 class ProfessorHomeContent extends Component {

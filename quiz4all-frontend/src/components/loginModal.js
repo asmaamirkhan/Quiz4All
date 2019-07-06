@@ -2,36 +2,40 @@
  @author: Asmaa ~ 2019 
 */
 import React, { Component } from 'react';
-import './css/components.css';
-import { Modal, Button, Form, Col, Alert } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.css';
-import axios from 'axios';
 import { setCookie } from 'react-simple-cookie-store';
+import { Modal, Form, Input, Icon } from 'antd';
+
+import 'antd/dist/antd.css';
+import axios from 'axios';
 
 class LoginModal extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       showAlert: false,
-      show: false,
-      email: '',
+      visible: false,
+      email: '', 
       pwd: ''
     };
-
-    this.handleShow = this.handleShow.bind(this);
-    this.handleClose = this.handleClose.bind(this);
+    this.showModal = this.showModal.bind(this);
     this.handleEmail = this.handleEmail.bind(this);
     this.handlePwd = this.handlePwd.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleClose() {
-    this.setState({ show: false });
-  }
+  showModal() {
+    this.setState({
+      visible: true,
+    });
+  };
 
-  handleShow() {
-    this.setState({ show: true });
-  }
+  handleCancel = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+
 
   handleEmail(event) {
     this.setState({ email: event.target.value });
@@ -49,6 +53,7 @@ class LoginModal extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+
     axios.post('http://localhost:3000/access?process=login', {
       email: this.state.email,
       password: this.state.pwd
@@ -73,41 +78,31 @@ class LoginModal extends Component {
 
   render() {
     return (
+      <Modal
+        title="Basic Modal"
+        visible={this.state.visible}
+        okText="Login"
+        onOk={this.handleSubmit}
+        onCancel={this.handleCancel}
+      >
+        <Form className="login-form">
+          <Form.Item>
 
-      <Modal show={this.state.show} onHide={this.handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Login</Modal.Title>
-        </Modal.Header>
-        <Form>
-          <Modal.Body>
-            <div id='formContent'>
-              <Form.Row>
-                <Form.Group as={Col} controlId="formEmail" required>
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control type="email" placeholder="example@mail.com" onChange={this.handleEmail} />
-                </Form.Group>
-              </Form.Row>
+            <Input
+              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              placeholder="Email" size="large" onChange={this.handleEmail}
+            />
 
-              <Form.Group controlId="formPass">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" onChange={this.handlePwd} />
-              </Form.Group>
+          </Form.Item>
+          <Form.Item>
 
-              <Alert variant="primary" show={this.state.showAlert} id='modalAlert' />
-            </div>
+            <Input
+              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              type="password"
+              placeholder="Password" size="large" onChange={this.handlePwd}
+            />
 
-
-          </Modal.Body>
-
-          <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleClose} >
-              Close
-            </Button>
-            <Button variant="primary" type="submit" onClick={this.handleSubmit} id='signupBut'>
-              Login
-            </Button>
-          </Modal.Footer>
-
+          </Form.Item>
         </Form>
       </Modal>
 

@@ -2,34 +2,37 @@
  @author: Asmaa ~ 2019 
 */
 import React, { Component } from 'react';
-import './css/components.css';
-import { Modal, Button, Form, Alert } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios';
+import { Modal, Form, Input, Icon, Alert } from 'antd';
+import 'antd/dist/antd.css';
 
 class StudentModal extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       showAlert: false,
-      show: false,
+      visible: false,
       quizCode: ''
     };
 
-    this.handleShow = this.handleShow.bind(this);
-    this.handleClose = this.handleClose.bind(this);
+    this.showModal = this.showModal.bind(this);
     this.handleQuizCode = this.handleQuizCode.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.checkEmptyFields = this.checkEmptyFields.bind(this);
   }
 
-  handleClose() {
-    this.setState({ show: false });
-  }
+  showModal() {
+    this.setState({
+      visible: true,
+    });
+  };
 
-  handleShow() {
-    this.setState({ show: true });
-  }
+  handleCancel = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
 
   handleQuizCode(event) {
     this.setState({ quizCode: event.target.value });
@@ -54,8 +57,8 @@ class StudentModal extends Component {
         })
           .then((response) => {
             if (response.data.status === false) {
-              this.setState({ showAlert: true });
-              document.getElementById('modalAlert').innerHTML = response.data.message;
+              this.setState({ showAlert: true, alertMessage: response.data.message });
+
             } else {
             }
           })
@@ -72,24 +75,29 @@ class StudentModal extends Component {
   render() {
     return (
 
-      <Modal show={this.state.show} onHide={this.handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Find a quiz</Modal.Title>
-        </Modal.Header>
-        <Form>
-          <Modal.Body>
+      <Modal
+        title="Find a quiz"
+        visible={this.state.visible}
+        okText="Find"
+        onOk={this.handleSubmit}
+        onCancel={this.handleCancel}
+      >
+        <Form className="login-form">
+          <Form.Item>
 
-            <Form.Group controlId="quizCode">
-              <Form.Label>Enter quiz code given by your instructor:</Form.Label>
-              <Form.Control placeholder="Ex: 7X@14D" onChange={this.handleQuizCode} />
-            </Form.Group>
-            <Alert variant="primary" show={this.state.showAlert} id='modalAlert' />
-          </Modal.Body>
-          <Modal.Footer>
-            <Button type="submit" variant="primary" onClick={this.handleSubmit}>
-              Find
-            </Button>
-          </Modal.Footer>
+            <Input
+              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              placeholder="Ex: 7X@14D" onChange={this.handleQuizCode}size="large" 
+            />
+
+          </Form.Item>
+          <Alert
+          style={{ display: this.state.showAlert ? 'block' : 'none' }} id='modalAlert'
+          message="Error"
+          description={this.state.alertMessage}
+          type={this.state.alertType}
+          showIcon
+        />
         </Form>
       </Modal>
 
