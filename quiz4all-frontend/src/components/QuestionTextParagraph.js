@@ -2,52 +2,44 @@
  @author: Asmaa ~ 2019 
 */
 import React, { Component } from 'react';
-import Divider from '@material-ui/core/Divider';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import TextField from '@material-ui/core/TextField';
-import FormLabel from '@material-ui/core/FormLabel';
+
+import { Typography, Layout, Input  } from 'antd';
+const { Content } = Layout;
+const { Title } = Typography;
+const { TextArea } = Input;
 
 class QuestionTextParagraph extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gilad: true,
-      jason: false,
-      antoine: false,
+      questionText: 'Lorem ipsum',
     }
   }
 
   componentDidMount() {
   }
 
-  handleChange = name => event => {
-    this.setState({ ...this.state, [name]: event.target.checked });
-  };
-
-
-
-
   render() {
     return (
       <div>
 
-        <FormControl style={{ minWidth: 120 }} >
-        <FormLabel component="legend">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore?</FormLabel>
+        <Content
+          style={{
+            margin: '24px 16px',
+            padding: 24,
+            background: '#fff',
+            height: 'auto',
+            minHeight: 'auto'
+          }}
+        >
+          <Title level={3}>5) Long answer question: the answer is a paragraph</Title>
+          <p>Question: {this.state.questionText}</p>
           
-          <TextField
-            id="standard-multiline-flexible"
-            label="Multiline"
-            multiline
-            rowsMax="4"
-            value={this.state.value}
-            onChange={this.handleChange()}
-            style={{ 'width': '100%' }}
+          <TextArea
+            placeholder="Long answer"
+            autosize={{ minRows: 2, maxRows: 6 }}
           />
-          <Divider variant="fullWidth" component='hr' />
-          <br/>
-
-        </FormControl>
+        </Content>
 
 
       </div>

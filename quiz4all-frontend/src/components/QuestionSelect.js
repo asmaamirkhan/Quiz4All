@@ -2,57 +2,54 @@
  @author: Asmaa ~ 2019 
 */
 import React, { Component } from 'react';
-import Divider from '@material-ui/core/Divider';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormLabel from '@material-ui/core/FormLabel';
-
+import { Typography, Layout, Menu, Dropdown, Icon, Button } from 'antd';
+const { Content } = Layout;
+const { Title } = Typography;
+const menu = (
+  <Menu>
+    <Menu.Item key="0">
+      1st item
+    </Menu.Item>
+    <Menu.Item key="1">
+      2nd item
+    </Menu.Item>
+    <Menu.Item key="3">3rd menu item</Menu.Item>
+  </Menu>
+);
 class QuestionSelect extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gilad: true,
-      jason: false,
-      antoine: false,
+      questionText: 'Lorem ipsum',
     }
   }
 
   componentDidMount() {
   }
 
-  handleChange = name => event => {
-    this.setState({ ...this.state, [name]: event.target.checked });
-  };
-
-
 
 
   render() {
     return (
       <div>
-        <FormLabel component="legend">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore?</FormLabel>
-        <FormControl style={{ minWidth: 120 }} >
-          <InputLabel htmlFor="age-simple">Lorem Ipsum</InputLabel>
-          <Select
-            value={this.state.age}
-            onChange={this.handleChange}
-            inputProps={{
-              name: 'age',
-              id: 'age-simple',
-            }}
-          >
-            <MenuItem value={1}>First</MenuItem>
-            <MenuItem value={2}>Second</MenuItem>
-            <MenuItem value={3}>Third</MenuItem>
-          </Select>
 
-          <br />
-
-          <Divider variant="fullWidth" component='hr' />
-        </FormControl>
-
+        <Content
+          style={{
+            margin: '24px 16px',
+            padding: 24,
+            background: '#fff',
+            height: 'auto',
+            minHeight: 'auto'
+          }}
+        >
+          <Title level={3}>3) Drop Down Menu: a question with single true answer shown as a list</Title>
+          <p>Question: {this.state.questionText}</p>
+          <Dropdown overlay={menu}>
+            <Button>
+              Button <Icon type="down" />
+            </Button>
+          </Dropdown>
+        </Content>
 
       </div>
 

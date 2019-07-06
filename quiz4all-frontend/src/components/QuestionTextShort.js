@@ -2,43 +2,40 @@
  @author: Asmaa ~ 2019 
 */
 import React, { Component } from 'react';
-import Divider from '@material-ui/core/Divider';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import TextField from '@material-ui/core/TextField';
+
+import { Typography, Layout, Input } from 'antd';
+const { Content } = Layout;
+const { Title } = Typography;
 
 class QuestionTextShort extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gilad: true,
-      jason: false,
-      antoine: false,
+
+      questionText: 'Lorem ipsum',
     }
   }
 
   componentDidMount() {
   }
 
-  handleChange = name => event => {
-    this.setState({ ...this.state, [name]: event.target.checked });
-  };
 
   render() {
     return (
       <div>
-        <FormControl style={{ minWidth: 120 }} >
-          <FormLabel component="legend">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore?</FormLabel>
-          <TextField
-            id="standard-name"
-            label="Answer"
-            value={this.state.name}
-            onChange={this.handleChange()}
-          />
-          <br/>
-          <Divider variant="fullWidth" component='hr' />
-          <br/>
-        </FormControl>
+        <Content
+          style={{
+            margin: '24px 16px',
+            padding: 24,
+            background: '#fff',
+            height: 'auto',
+            minHeight: 'auto'
+          }}
+        >
+          <Title level={3}>4) Short answer question: the answer has few words</Title>
+          <p>Question: {this.state.questionText}</p>
+          <Input placeholder="Answer ..." />
+        </Content>
       </div>
 
     );

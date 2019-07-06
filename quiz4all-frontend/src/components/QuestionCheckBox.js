@@ -2,30 +2,26 @@
  @author: Asmaa ~ 2019 
 */
 import React, { Component } from 'react';
-import { Row } from 'react-bootstrap';
-import Checkbox from '@material-ui/core/Checkbox';
-import Divider from '@material-ui/core/Divider';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormLabel from '@material-ui/core/FormLabel';
-
+import { Typography, Layout, Checkbox } from 'antd';
+const { Content } = Layout;
+const { Title } = Typography;
 class QuestionCheckbox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gilad: true,
-      jason: false,
-      antoine: false,
+      options: ['Apple', 'Pear', 'Orange'],
+      questionText: 'Lorem ipsum'
     }
   }
+
 
   componentDidMount() {
   }
 
-  handleChange = name => event => {
-    this.setState({ ...this.state, [name]: event.target.checked });
-  };
+
+  onChange(checkedValues) {
+    console.log('checked = ', checkedValues);
+  }
 
 
 
@@ -33,30 +29,20 @@ class QuestionCheckbox extends Component {
   render() {
     return (
       <div>
+        <Content
+          style={{
+            margin: '24px 16px',
+            padding: 24,
+            background: '#fff',
+            height: 'auto',
+            minHeight: 'auto'
+          }}
+        >
+          <Title level={3}>1) Multiple choices: a question with multiple true answers:</Title>
+          <p>Question: {this.state.questionText}</p>
+          <Checkbox.Group options={this.state.options} defaultValue={['Apple']} onChange={this.onChange} />
 
-          <FormControl component="fieldset" >
-            <FormLabel component="legend">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore?</FormLabel>
-            <FormGroup>
-              <FormControlLabel
-                control={<Checkbox checked={this.state.gilad} onChange={this.handleChange('gilad')} value="1" />}
-                label="1st Option"
-              />
-              <FormControlLabel
-                control={<Checkbox checked={this.state.jason} onChange={this.handleChange('jason')} value="2" />}
-                label="2nd Option"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox checked={this.state.antoine} onChange={this.handleChange('antoine')} value="3" />
-                }
-                label="3rd Option"
-              />
-            </FormGroup>
-            <Divider variant="fullWidth" component='hr' />
-            <br/>
-          </FormControl>
-      
-
+        </Content>
       </div>
 
     );

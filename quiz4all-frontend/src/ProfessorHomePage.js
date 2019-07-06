@@ -8,8 +8,7 @@ import 'antd/dist/antd.css';
 
 import { removeCookie } from 'react-simple-cookie-store';
 import { Layout, Menu, Icon } from 'antd';
-const { Header, Sider } = Layout;
-
+const { Header, Sider, Footer } = Layout;
 class ProfessorHome extends Component {
   state = {
     collapsed: false,
@@ -47,6 +46,7 @@ class ProfessorHome extends Component {
               </Menu>
             </Header>
             <ProfessorHomeContent />
+            <Footer style={{ textAlign: 'center' }}>Quiz4All ©2019 Developed by Asmaa</Footer>
           </Layout>
         </Layout>
       </div>
