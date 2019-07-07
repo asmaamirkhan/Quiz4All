@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var bodyParser = require('body-parser')
+var cors = require('cors');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -26,17 +26,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//app.use(bodyParser.json()); 
 
-/*app.use(function(req, res, next) {
-//res.header("Access-Control-Allow-Origin", "*");
-//res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  console.log("CORS");
-  console.log(req.body);
-  console.log("CORS");
-  next()
-  });*/
-app.use(verifyAuth)
+app.use(cors());
+app.use(verifyAuth);
 app.use('/access', accessRouter);
 app.use('/student', studentRouter);
 
