@@ -3,7 +3,7 @@
 */
 import React, { Component } from 'react';
 import ProfSidebar from './components/profSidebar';
-import ProfessorHomeContent from './components/professorHomeContent';
+import ProfessorNewQuizContent from './components/professorNewQuizContent';
 import 'antd/dist/antd.css';
 
 import { removeCookie } from 'react-simple-cookie-store';
@@ -46,7 +46,7 @@ class ProfessorNewQuizPage extends Component {
                 <Menu.Item key="1" onClick={this.logout}><Icon type="logout" />Logout</Menu.Item>
               </Menu>
             </Header>
-            <ProfessorHomeContent />
+            <ProfessorNewQuizContent />
           </Layout>
         </Layout>
       </div>

@@ -17,12 +17,23 @@ code {
 }
 
 .logo {
-  width: 120px;
-  height: 31px;
+  height: 32px;
   background: rgba(255, 255, 255, 0.2);
-  margin: 16px 24px 16px 0;
-  float: left;
+  margin: 16px;
 }
+
+.trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.trigger:hover {
+  color: #1890ff;
+}
+
 
 #home-page{
   background-image: url("./components/media/computer-lab.jpg");
